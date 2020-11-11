@@ -17,7 +17,7 @@ namespace ClassDemoMinFoersteRazorPage.Pages.Events
 
         public IndexModel()
         {
-            catalog = new FakeEventCatalog();
+            catalog = FakeEventCatalog.Instance;
         }
 
         public void OnGet()

@@ -8,11 +8,11 @@
 
 <table class="table">
     <thead>
-        <th>Id</th>
-        <th>Navn</th>
-        <th>Beskrivelse</th>
-        <th>Sted</th>
-        <th>Tid</th>
+    <th>Id</th>
+    <th>Navn</th>
+    <th>Beskrivelse</th>
+    <th>Sted</th>
+    <th>Tid</th>
     </thead>
     <tbody>
     @foreach (var ev in Model.Events)
@@ -27,4 +27,6 @@
     }
     </tbody>
 </table>
+<p></p>
+<a asp-page="CreateEvent">Laver et nyt Event</a>
 
