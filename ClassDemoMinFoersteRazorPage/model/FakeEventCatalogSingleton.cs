@@ -6,11 +6,45 @@ using ClassDemoMinFoersteRazorPage.interfaces;
 
 namespace ClassDemoMinFoersteRazorPage.model
 {
-    public class FakeEventCatalog: IFakeEventCatalog
+    // laves om til en singleton - altså kun EET objekt
+
+    public class FakeEventCatalogSingleton : IFakeEventCatalog
     {
+        /*
+         * Start på singleton
+         *
+         * 3 step
+         * 1) laver konstruktør privat
+         * 2) laver et objekt af klassen selv som et instans felt - static dvs på klassen
+         * 3) laver en property til at hente et objekt - static dvs på klassen
+         *
+         */
+
+
+        private static FakeEventCatalogSingleton _instance = new FakeEventCatalogSingleton();  // eager altså med det samme 
+
+        public static FakeEventCatalogSingleton Instance { get { return _instance; } }
+
+
+        /*
+        public static FakeEventCatalogSingleton Instance
+        {
+            get
+            {
+                // kunne lave objektet her - lazy
+                // første gang man skal bruge objektet
+                if (_instance == null)
+                {
+                    _instance = new FakeEventCatalogSingleton();
+                }
+
+                return _instance;
+            }
+        }
+        */
         
 
-        public  FakeEventCatalog()
+        private FakeEventCatalogSingleton()
         {
             events = new List<Event>();
             events.Add(new Event(10, "skole", "læser", "roskilde", DateTime.Now));
@@ -18,6 +52,10 @@ namespace ClassDemoMinFoersteRazorPage.model
             events.Add(new Event(30, "skole2", "læser mere", "København", DateTime.Now));
 
         }
+
+        /*
+         * Færdig med singleton
+         */
 
 
         private List<Event> events = null;
@@ -59,9 +97,5 @@ namespace ClassDemoMinFoersteRazorPage.model
 
             return liste;
         }
-
-
-
-
     }
 }

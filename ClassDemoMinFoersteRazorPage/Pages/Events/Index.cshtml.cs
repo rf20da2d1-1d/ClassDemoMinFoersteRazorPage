@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClassDemoMinFoersteRazorPage.interfaces;
 using ClassDemoMinFoersteRazorPage.model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,7 +11,7 @@ namespace ClassDemoMinFoersteRazorPage.Pages.Events
 {
     public class IndexModel : PageModel
     {
-        private FakeEventCatalog catalog;
+        private IFakeEventCatalog _catalog;
 
         // properties til view
         public List<Event> Events { get; private set; }
@@ -18,14 +19,14 @@ namespace ClassDemoMinFoersteRazorPage.Pages.Events
         [BindProperty]
         public String  FilterCriteria { get; set; }
 
-        public IndexModel()
+        public IndexModel(IFakeEventCatalog diCatalog)
         {
-            catalog = FakeEventCatalog.Instance;
+            _catalog = diCatalog;
         }
 
         public void OnGet()
         {
-            Events = catalog.GetAllEvents();
+            Events = _catalog.GetAllEvents();
 
         }
 
@@ -34,11 +35,11 @@ namespace ClassDemoMinFoersteRazorPage.Pages.Events
             // tjekker lige at filter er sat
             if (string.IsNullOrWhiteSpace(FilterCriteria))
             {
-                Events = catalog.GetAllEvents();
+                Events = _catalog.GetAllEvents();
             }
             else
             {
-                Events = catalog.GetByFilter(FilterCriteria);
+                Events = _catalog.GetByFilter(FilterCriteria);
             }
 
 
