@@ -80,5 +80,21 @@ namespace ClassDemoMinFoersteRazorPage.model
             // insert event with generated id in the list
             events.Add(ev);
         }
+
+        public List<Event> GetByFilter(string filterCriteria)
+        {
+            List<Event> liste = new List<Event>();
+
+            foreach (Event ev in events)
+            {
+                if (ev.City.ToLower().Contains(filterCriteria.ToLower()))
+                {
+                    liste.Add(ev);
+                }
+
+            }
+
+            return liste;
+        }
     }
 }

@@ -15,6 +15,9 @@ namespace ClassDemoMinFoersteRazorPage.Pages.Events
         // properties til view
         public List<Event> Events { get; private set; }
 
+        [BindProperty]
+        public String  FilterCriteria { get; set; }
+
         public IndexModel()
         {
             catalog = FakeEventCatalog.Instance;
@@ -23,6 +26,21 @@ namespace ClassDemoMinFoersteRazorPage.Pages.Events
         public void OnGet()
         {
             Events = catalog.GetAllEvents();
+
+        }
+
+        public void OnPost()
+        {
+            // tjekker lige at filter er sat
+            if (string.IsNullOrWhiteSpace(FilterCriteria))
+            {
+                Events = catalog.GetAllEvents();
+            }
+            else
+            {
+                Events = catalog.GetByFilter(FilterCriteria);
+            }
+
 
         }
     }

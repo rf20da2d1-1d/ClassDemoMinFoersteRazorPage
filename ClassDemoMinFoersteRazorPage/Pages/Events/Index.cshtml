@@ -6,6 +6,12 @@
 
 <h1>Liste over alle event</h1>
 
+<form method="post">
+    Search: <input type="text" asp-for="FilterCriteria"/>
+    <input type="submit" value="Search"/>
+</form>
+
+
 <table class="table">
     <thead>
     <th>Id</th>
@@ -23,6 +29,7 @@
             <td>@ev.Description</td>
             <td>@ev.City</td>
             <td>@ev.DateTimeOfEvent</td>
+            <td><a asp-page="EditEvent" asp-route-id="@ev.Id">Edit</a></td>
         </tr>
     }
     </tbody>
